@@ -246,18 +246,21 @@ plotHistogram = function (pmat,expmat,clusters,zscoreThreshold=4,patients=NULL,c
   }
   if(is.null(patients) & is.null(celltypes)){
     p=pheatmap::pheatmap(t(pmat),cluster_rows=F, cutree_cols = clusters, col=squash::bluered(100),gaps_col=50,show_colnames = F,clustering_distance_cols="euclidean")
+    ppdf(print(p))	  
   }
   else if (is.null(celltypes)){
     patientcolors =data.frame(patients)
     rownames(patientcolors)=colnames(expmat)
     pmat=pmat[colnames(expmat),]
     p=pheatmap::pheatmap(t(pmat),cluster_rows=F,silent=F, cutree_cols = clusters, col=squash::bluered(100),gaps_col=50,annotation=patientcolors,show_colnames = F,clustering_distance_cols="euclidean")
+    ppdf(print(p))	  
   }
   else if(is.null(patients)){
     patientcolors =data.frame(celltypes)
     rownames(patientcolors)=colnames(expmat)
     pmat=pmat[colnames(expmat),]
     p=pheatmap::pheatmap(t(pmat),cluster_rows=F, cutree_cols = clusters, col=squash::bluered(100),gaps_col=50,annotation=patientcolors,show_colnames = F,clustering_distance_cols="euclidean")
+    ppdf(print(p))	  
   }
   else {
     patientcolors =data.frame(celltypes)
@@ -265,6 +268,7 @@ plotHistogram = function (pmat,expmat,clusters,zscoreThreshold=4,patients=NULL,c
     rownames(patientcolors)=colnames(expmat)
 	pmat=pmat[colnames(expmat),]
     p=pheatmap::pheatmap(t(pmat),cluster_rows=F, cutree_cols = clusters, col=squash::bluered(100),gaps_col=50,annotation=patientcolors,show_colnames = F,clustering_distance_cols="euclidean")
+    ppdf(print(p))	  
   }
  ord=unique(cutree(p$tree_col, k = clusters)[p$tree_col[["order"]]])
  numb=table(cutree(p$tree_col, k = clusters))[ord]
